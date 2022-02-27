@@ -1,0 +1,2441 @@
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (7.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (4.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20220220172621)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220220172621"]]
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateLists (20220220172639)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "lists" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "task" varchar, "status" varchar, "user_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_d6cf4279f7"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_lists_on_user_id" ON "lists" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20220220172639"]]
+  [1m[36mTRANSACTION (3.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-02-20 17:27:34.726791"], ["updated_at", "2022-02-20 17:27:34.726791"]]
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "hashish"], ["created_at", "2022-02-20 17:27:43.026009"], ["updated_at", "2022-02-20 17:27:43.026009"]]
+  [1m[36mTRANSACTION (7.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mList Create (0.3ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "create api"], ["status", "ongoing"], ["user_id", 1], ["created_at", "2022-02-20 17:28:23.972260"], ["updated_at", "2022-02-20 17:28:23.972260"]]
+  [1m[36mTRANSACTION (4.8ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/" for 127.0.0.1 at 2022-02-20 19:28:45 +0200
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/mohamed/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/mohamed/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 3.0ms | Allocations: 678)
+Completed 200 OK in 16ms (Views: 8.2ms | ActiveRecord: 0.0ms | Allocations: 6380)
+
+
+Started GET "/user" for 127.0.0.1 at 2022-02-20 19:28:49 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/user"):
+  
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:28:51 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 19ms (Views: 9.7ms | ActiveRecord: 1.3ms | Allocations: 6381)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:28:55 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/lists"):
+  
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:28:58 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms | Allocations: 731)
+
+
+Started GET "/" for 127.0.0.1 at 2022-02-20 19:32:58 +0200
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/mohamed/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/mohamed/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 3.2ms | Allocations: 566)
+Completed 200 OK in 26ms (Views: 11.7ms | ActiveRecord: 0.0ms | Allocations: 5024)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:33:03 +0200
+Processing by UsersController#index as HTML
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms | Allocations: 1971)
+
+
+  
+NameError (undefined local variable or method `list' for #<UsersController:0x000000000093d0>):
+  
+app/controllers/users_controller.rb:6:in `index'
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:33:37 +0200
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 44ms (Views: 12.9ms | ActiveRecord: 0.8ms | Allocations: 18949)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:36:22 +0200
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/home/mohamed/Desktop/project/app/controllers/lists_controller.rb:6: syntax error, unexpected end-of-input, expecting `end'):
+  
+app/controllers/lists_controller.rb:6: syntax error, unexpected end-of-input, expecting `end'
+app/controllers/lists_controller.rb:6: syntax error, unexpected end-of-input, expecting `end'
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:36:36 +0200
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for ListsController):
+  
+actionpack (7.0.2.2) lib/abstract_controller/base.rb:146:in `process'
+actionpack (7.0.2.2) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.2.2) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:850:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (7.0.2.2) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.2.2) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.2.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (7.0.2.2) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.2.2) lib/rails/rack/logger.rb:25:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.2.2) lib/rails/engine.rb:530:in `call'
+puma (5.6.2) lib/puma/configuration.rb:252:in `call'
+puma (5.6.2) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.2) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.2) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.2) lib/puma/server.rb:441:in `process_client'
+puma (5.6.2) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:36:38 +0200
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for ListsController):
+  
+actionpack (7.0.2.2) lib/abstract_controller/base.rb:146:in `process'
+actionpack (7.0.2.2) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.2.2) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:850:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (7.0.2.2) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.2.2) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.2.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (7.0.2.2) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.2.2) lib/rails/rack/logger.rb:25:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.2.2) lib/rails/engine.rb:530:in `call'
+puma (5.6.2) lib/puma/configuration.rb:252:in `call'
+puma (5.6.2) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.2) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.2) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.2) lib/puma/server.rb:441:in `process_client'
+puma (5.6.2) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:36:39 +0200
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for ListsController):
+  
+actionpack (7.0.2.2) lib/abstract_controller/base.rb:146:in `process'
+actionpack (7.0.2.2) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.2.2) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:850:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (7.0.2.2) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.2.2) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.2.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (7.0.2.2) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.2.2) lib/rails/rack/logger.rb:25:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.2.2) lib/rails/engine.rb:530:in `call'
+puma (5.6.2) lib/puma/configuration.rb:252:in `call'
+puma (5.6.2) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.2) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.2) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.2) lib/puma/server.rb:441:in `process_client'
+puma (5.6.2) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:36:39 +0200
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for ListsController):
+  
+actionpack (7.0.2.2) lib/abstract_controller/base.rb:146:in `process'
+actionpack (7.0.2.2) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.2.2) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.2.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.2.2) lib/action_dispatch/routing/route_set.rb:850:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (7.0.2.2) lib/active_record/migration.rb:603:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.2.2) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:26:in `call'
+railties (7.0.2.2) lib/rails/rack/logger.rb:36:in `call_app'
+railties (7.0.2.2) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.2.2) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.2.2) lib/rails/rack/logger.rb:25:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/server_timing.rb:20:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:137:in `call'
+railties (7.0.2.2) lib/rails/engine.rb:530:in `call'
+puma (5.6.2) lib/puma/configuration.rb:252:in `call'
+puma (5.6.2) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.2) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.2) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.2) lib/puma/server.rb:441:in `process_client'
+puma (5.6.2) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:36:51 +0200
+Processing by ListsController#index as HTML
+Completed 500 Internal Server Error in 7ms (Allocations: 2057)
+
+
+  
+NameError (undefined local variable or method `lists' for #<ListsController:0x00000000011468>
+Did you mean?  lists_url):
+  
+app/controllers/lists_controller.rb:3:in `index'
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:36:53 +0200
+Processing by ListsController#index as HTML
+Completed 500 Internal Server Error in 7ms (Allocations: 2018)
+
+
+  
+NameError (undefined local variable or method `lists' for #<ListsController:0x00000000011620>
+Did you mean?  lists_url):
+  
+app/controllers/lists_controller.rb:3:in `index'
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:37:05 +0200
+Processing by ListsController#index as HTML
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:5:in `index'
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:5:in `index'
+Completed 200 OK in 26ms (Views: 17.6ms | ActiveRecord: 1.5ms | Allocations: 7873)
+
+
+Started GET "/" for 127.0.0.1 at 2022-02-20 19:44:45 +0200
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/mohamed/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/mohamed/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.4ms | Allocations: 566)
+Completed 200 OK in 11ms (Views: 4.1ms | ActiveRecord: 0.0ms | Allocations: 5024)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:44:48 +0200
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 25ms (Views: 14.7ms | ActiveRecord: 1.7ms | Allocations: 7301)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:46:04 +0200
+Processing by ListsController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 15ms (Views: 10.0ms | ActiveRecord: 1.4ms | Allocations: 3967)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:46:05 +0200
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 4ms (Views: 3.0ms | ActiveRecord: 0.3ms | Allocations: 731)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:46:06 +0200
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms | Allocations: 731)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:46:06 +0200
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 2ms (Views: 1.7ms | ActiveRecord: 0.1ms | Allocations: 747)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:46:06 +0200
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.1ms | ActiveRecord: 0.2ms | Allocations: 747)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:46:27 +0200
+Processing by ListsController#index as HTML
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 14ms (Views: 9.7ms | ActiveRecord: 1.7ms | Allocations: 3952)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:46:28 +0200
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms | Allocations: 731)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:46:28 +0200
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.2ms | Allocations: 731)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:46:29 +0200
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.1ms | Allocations: 731)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:46:32 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 13ms (Views: 6.9ms | ActiveRecord: 0.9ms | Allocations: 4572)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:47:48 +0200
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 46ms (Views: 10.6ms | ActiveRecord: 0.7ms | Allocations: 18946)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:48:05 +0200
+Processing by UsersController#index as HTML
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 15ms (Views: 9.6ms | ActiveRecord: 1.9ms | Allocations: 3590)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:48:07 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.2ms | Allocations: 733)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:48:07 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.0ms | ActiveRecord: 0.3ms | Allocations: 732)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:48:08 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.2ms | Allocations: 732)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:48:08 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.7ms | ActiveRecord: 0.2ms | Allocations: 716)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:49:20 +0200
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 45ms (Views: 9.3ms | ActiveRecord: 0.7ms | Allocations: 18946)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:49:22 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 3ms (Views: 2.6ms | ActiveRecord: 0.2ms | Allocations: 732)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:49:29 +0200
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+Completed 200 OK in 12ms (Views: 6.2ms | ActiveRecord: 0.6ms | Allocations: 5521)
+
+
+Started GET "/" for 127.0.0.1 at 2022-02-20 19:51:28 +0200
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/mohamed/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/mohamed/.rbenv/versions/2.7.1/lib/ruby/gems/2.7.0/gems/railties-7.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.5ms | Allocations: 566)
+Completed 200 OK in 18ms (Views: 5.9ms | ActiveRecord: 0.0ms | Allocations: 5024)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:51:32 +0200
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 30ms (Views: 16.8ms | ActiveRecord: 1.8ms | Allocations: 6370)
+
+
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:53:55 +0200
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 500 Internal Server Error in 23ms (ActiveRecord: 0.6ms | Allocations: 21193)
+
+
+  
+NameError (uninitialized constant JSONAPI::Serializer):
+  
+app/serializers/user_serializer.rb:2:in `<class:UserSerializer>'
+app/serializers/user_serializer.rb:1:in `<main>'
+app/controllers/users_controller.rb:8:in `index'
+Started GET "/users" for 127.0.0.1 at 2022-02-20 19:54:39 +0200
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.35ms)
+Completed 200 OK in 56ms (Views: 27.1ms | ActiveRecord: 2.3ms | Allocations: 21464)
+
+
+Started GET "/lists" for 127.0.0.1 at 2022-02-20 19:55:30 +0200
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ListsController#index as HTML
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (0.49ms)
+Completed 200 OK in 36ms (Views: 22.2ms | ActiveRecord: 0.7ms | Allocations: 21885)
+
+
+Started GET "/lists/show" for 127.0.0.1 at 2022-02-20 19:58:43 +0200
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/home/mohamed/Desktop/project/app/controllers/lists_controller.rb:11: syntax error, unexpected end-of-input, expecting `end'):
+  
+app/controllers/lists_controller.rb:11: syntax error, unexpected end-of-input, expecting `end'
+app/controllers/lists_controller.rb:11: syntax error, unexpected end-of-input, expecting `end'
+Started GET "/lists/show" for 127.0.0.1 at 2022-02-20 19:58:51 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.71ms)
+Completed 200 OK in 30ms (Views: 8.0ms | ActiveRecord: 1.8ms | Allocations: 9937)
+
+
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mList Create (0.3ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "second task"], ["status", "ongoing"], ["user_id", 1], ["created_at", "2022-02-20 17:59:31.712076"], ["updated_at", "2022-02-20 17:59:31.712076"]]
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/lists/show" for 127.0.0.1 at 2022-02-20 19:59:35 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.41ms)
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.4ms | Allocations: 793)
+
+
+Started GET "/lists/show" for 127.0.0.1 at 2022-02-20 19:59:37 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.26ms)
+Completed 200 OK in 3ms (Views: 0.9ms | ActiveRecord: 0.2ms | Allocations: 776)
+
+
+Started GET "/lists/create" for 127.0.0.1 at 2022-02-20 20:02:29 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"create"}
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+  [1m[36mList Load (0.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.49ms)
+Completed 200 OK in 22ms (Views: 3.1ms | ActiveRecord: 2.7ms | Allocations: 4314)
+
+
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started GET "/users/create" for 127.0.0.1 at 2022-02-20 20:02:52 +0200
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"create"}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+Completed 404 Not Found in 12ms (ActiveRecord: 1.5ms | Allocations: 2917)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=create):
+  
+app/controllers/users_controller.rb:44:in `set_user'
+Started POST "/lists/create" for ::1 at 2022-02-20 20:05:17 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/lists/create"):
+  
+Started GET "/lists/show" for ::1 at 2022-02-20 20:05:31 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.36ms)
+Completed 200 OK in 4ms (Views: 1.5ms | ActiveRecord: 0.2ms | Allocations: 774)
+
+
+Started GET "/favicon.ico" for ::1 at 2022-02-20 20:05:31 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started POST "/lists" for ::1 at 2022-02-20 20:06:22 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by ListsController#create as */*
+  Parameters: {"list"=>{}}
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 1.6ms | Allocations: 2103)
+
+
+  
+NameError (undefined local variable or method `list_params' for #<ListsController:0x00000000015720>
+Did you mean?  list_path):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists" for ::1 at 2022-02-20 20:07:09 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by ListsController#create as */*
+  Parameters: {"list"=>{}}
+Completed 204 No Content in 2ms (ActiveRecord: 1.2ms | Allocations: 1126)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started POST "/lists/create" for ::1 at 2022-02-20 20:07:32 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/lists/create"):
+  
+Started POST "/lists/" for ::1 at 2022-02-20 20:08:35 +0200
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by ListsController#create as */*
+  Parameters: {"list"=>{}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mList Create (0.8ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "tetsing the create function"], ["status", "outgoing"], ["user_id", 1], ["created_at", "2022-02-20 18:08:36.008635"], ["updated_at", "2022-02-20 18:08:36.008635"]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.55ms)
+Completed 200 OK in 43ms (Views: 4.0ms | ActiveRecord: 8.8ms | Allocations: 10223)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Shisha"], ["created_at", "2022-02-20 18:10:06.739428"], ["updated_at", "2022-02-20 18:10:06.739428"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mList Create (0.4ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "a task for shisha"], ["status", "ongoing"], ["user_id", 2], ["created_at", "2022-02-20 18:10:36.614363"], ["updated_at", "2022-02-20 18:10:36.614363"]]
+  [1m[36mTRANSACTION (7.4ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/lists/show" for ::1 at 2022-02-20 20:10:46 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.97ms)
+Completed 200 OK in 19ms (Views: 3.6ms | ActiveRecord: 1.6ms | Allocations: 4321)
+
+
+Started GET "/lists/show" for ::1 at 2022-02-20 20:10:47 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.25ms)
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 775)
+
+
+Started GET "/lists/show" for ::1 at 2022-02-20 20:11:09 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:9:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (16.68ms)
+Completed 200 OK in 49ms (Views: 30.3ms | ActiveRecord: 3.6ms | Allocations: 10003)
+
+
+Started GET "/lists/show" for ::1 at 2022-02-20 20:11:12 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers]   [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:9:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (5.14ms)
+Completed 200 OK in 9ms (Views: 5.8ms | ActiveRecord: 0.6ms | Allocations: 1702)
+
+
+Started GET "/lists/show" for ::1 at 2022-02-20 20:11:17 +0200
+Processing by ListsController#show as HTML
+  Parameters: {"id"=>"show"}
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:9:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (3.63ms)
+Completed 200 OK in 6ms (Views: 4.0ms | ActiveRecord: 0.3ms | Allocations: 1702)
+
+
+Started DELETE "/lists/" for ::1 at 2022-02-20 20:23:48 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:23:58 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:23:59 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/" for ::1 at 2022-02-20 20:24:04 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/" for ::1 at 2022-02-20 20:24:46 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:24:49 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/" for ::1 at 2022-02-20 20:24:54 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/" for ::1 at 2022-02-20 20:24:55 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/" for ::1 at 2022-02-20 20:25:19 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/" for ::1 at 2022-02-20 20:25:20 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:25:24 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:26:03 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:27:03 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:27:04 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:28:18 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:28:19 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists" for ::1 at 2022-02-20 20:28:48 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/" for ::1 at 2022-02-20 20:28:52 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started GET "/lists/show" for ::1 at 2022-02-20 20:29:50 +0200
+Processing by ListsController#show as */*
+  Parameters: {"id"=>"show"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+  [1m[36mList Load (0.8ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:9:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (17.12ms)
+Completed 200 OK in 42ms (Views: 21.0ms | ActiveRecord: 1.8ms | Allocations: 7111)
+
+
+Started GET "/lists" for ::1 at 2022-02-20 20:30:01 +0200
+Processing by ListsController#index as */*
+  [1m[36mList Load (0.7ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (15.92ms)
+Completed 200 OK in 22ms (Views: 19.9ms | ActiveRecord: 1.3ms | Allocations: 5046)
+
+
+Started PUT "/lists" for ::1 at 2022-02-20 20:46:43 +0200
+  
+ActionController::RoutingError (No route matches [PUT] "/lists"):
+  
+Started PUT "/lists/" for ::1 at 2022-02-20 20:46:54 +0200
+  
+ActionController::RoutingError (No route matches [PUT] "/lists"):
+  
+Started PUT "/lists/" for ::1 at 2022-02-20 20:47:10 +0200
+  
+ActionController::RoutingError (No route matches [PUT] "/lists"):
+  
+Started PATCH "/lists/" for ::1 at 2022-02-20 20:47:29 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/lists"):
+  
+Started PATCH "/lists/" for ::1 at 2022-02-20 20:47:33 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/lists"):
+  
+Started PATCH "/lists" for ::1 at 2022-02-20 20:47:37 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/lists"):
+  
+Started PATCH "/lists" for ::1 at 2022-02-20 20:50:03 +0200
+  
+NameError (undefined local variable or method `lists' for #<ActionDispatch::Routing::Mapper:0x00007f9bd4e223c8>):
+  
+config/routes.rb:4:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started PATCH "/lists" for ::1 at 2022-02-20 20:50:15 +0200
+  
+NameError (undefined local variable or method `list' for #<ActionDispatch::Routing::Mapper:0x00007f9bbc03b858>):
+  
+config/routes.rb:4:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started PATCH "/lists" for ::1 at 2022-02-20 20:50:16 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/lists"):
+  
+Started PATCH "/lists" for ::1 at 2022-02-20 20:50:40 +0200
+  
+NameError (undefined local variable or method `list' for #<ActionDispatch::Routing::Mapper:0x00007f9bc856f660>):
+  
+config/routes.rb:4:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started PATCH "/lists" for ::1 at 2022-02-20 20:51:01 +0200
+  
+NoMethodError (undefined method `PATCH' for #<ActionDispatch::Routing::Mapper:0x00007f9bd46060e0>
+Did you mean?  catch
+               match):
+  
+config/routes.rb:4:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started PATCH "/lists" for ::1 at 2022-02-20 20:53:41 +0200
+  
+NoMethodError (undefined method `PATCH' for #<ActionDispatch::Routing::Mapper:0x00005581711a4468>
+Did you mean?  catch
+               match):
+  
+config/routes.rb:4:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started PATCH "/lists" for ::1 at 2022-02-20 20:54:29 +0200
+  
+NoMethodError (undefined method `PATCH' for #<ActionDispatch::Routing::Mapper:0x00007f9bd4ae0d90>
+Did you mean?  catch
+               match):
+  
+config/routes.rb:4:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started PATCH "/lists" for ::1 at 2022-02-20 20:55:24 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/lists"):
+  
+Started PATCH "/lists" for ::1 at 2022-02-20 20:55:35 +0200
+  
+NoMethodError (undefined method `PATCH' for #<ActionDispatch::Routing::Mapper:0x00007f9bc8997288>
+Did you mean?  catch
+               match):
+  
+config/routes.rb:4:in `block in <main>'
+config/routes.rb:1:in `<main>'
+Started PATCH "/lists" for ::1 at 2022-02-20 20:56:52 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/lists"):
+  
+Started PATCH "/lists" for ::1 at 2022-02-20 20:58:02 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/lists"):
+  
+Started PATCH "/update" for ::1 at 2022-02-20 20:58:15 +0200
+  
+ActionController::RoutingError (No route matches [PATCH] "/update"):
+  
+Started DELETE "/lists/1" for ::1 at 2022-02-23 19:39:05 +0200
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mList Destroy (0.6ms)[0m  [1m[31mDELETE FROM "lists" WHERE "lists"."id" = ?[0m  [["id", 4]]
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+Completed 200 OK in 92ms (Views: 1.4ms | ActiveRecord: 6.8ms | Allocations: 24123)
+
+
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started DELETE "/lists/1" for ::1 at 2022-02-23 19:40:17 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 3ms (Allocations: 601)
+
+
+  
+NoMethodError (undefined method `destroy' for nil:NilClass):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/1" for ::1 at 2022-02-23 19:40:18 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 1ms (Allocations: 580)
+
+
+  
+NoMethodError (undefined method `destroy' for nil:NilClass):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/1" for ::1 at 2022-02-23 19:40:43 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 1ms (Allocations: 591)
+
+
+  
+NoMethodError (undefined method `destroy' for nil:NilClass):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/1" for ::1 at 2022-02-23 19:40:44 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 1ms (Allocations: 580)
+
+
+  
+NoMethodError (undefined method `destroy' for nil:NilClass):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/1" for ::1 at 2022-02-23 19:41:00 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mList Destroy (0.6ms)[0m  [1m[31mDELETE FROM "lists" WHERE "lists"."id" = ?[0m  [["id", 3]]
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+Completed 204 No Content in 19ms (ActiveRecord: 5.6ms | Allocations: 5162)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started PATCH "/lists/1" for ::1 at 2022-02-23 19:41:44 +0200
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by ListsController#update as */*
+  Parameters: {"id"=>"1", "list"=>{}}
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mList Update (0.8ms)[0m  [1m[33mUPDATE "lists" SET "task" = ?, "status" = ?, "updated_at" = ? WHERE "lists"."id" = ?[0m  [["task", "THIS IS AN UPDATED VERSION"], ["status", "done"], ["updated_at", "2022-02-23 17:41:44.597916"], ["id", 2]]
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+Completed 204 No Content in 56ms (ActiveRecord: 9.2ms | Allocations: 10975)
+
+
+Started PATCH "/lists/1" for ::1 at 2022-02-23 19:41:49 +0200
+Processing by ListsController#update as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+Completed 204 No Content in 5ms (ActiveRecord: 0.3ms | Allocations: 2463)
+
+
+Started PUT "/lists/1" for ::1 at 2022-02-23 19:41:54 +0200
+Processing by ListsController#update as */*
+  Parameters: {"id"=>"1", "list"=>{}}
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+Completed 204 No Content in 15ms (ActiveRecord: 1.0ms | Allocations: 2463)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started GET "/lists/1" for ::1 at 2022-02-23 19:43:26 +0200
+Processing by ListsController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mList Load (0.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:9:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (7.49ms)
+Completed 200 OK in 30ms (Views: 26.4ms | ActiveRecord: 0.7ms | Allocations: 5344)
+
+
+Started GET "/lists/2" for ::1 at 2022-02-23 19:43:36 +0200
+Processing by ListsController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:9:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (3.96ms)
+Completed 200 OK in 9ms (Views: 4.7ms | ActiveRecord: 0.4ms | Allocations: 1709)
+
+
+Started GET "/lists/2" for ::1 at 2022-02-23 19:43:37 +0200
+Processing by ListsController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" ASC LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 1]]
+  ↳ app/controllers/lists_controller.rb:8:in `show'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:9:in `show'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (2.94ms)
+Completed 200 OK in 5ms (Views: 3.3ms | ActiveRecord: 0.2ms | Allocations: 1708)
+
+
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:31:35 +0200
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 48ms (ActiveRecord: 0.0ms | Allocations: 18810)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x00000000009970>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:31:51 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 4ms (Allocations: 3219)
+
+
+  
+NameError (undefined local variable or method `user_id' for #<ListsController:0x0000000000d728>
+Did you mean?  user_url):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:31:53 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 3ms (Allocations: 2069)
+
+
+  
+NameError (undefined local variable or method `user_id' for #<ListsController:0x0000000000d7c8>
+Did you mean?  user_url):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:32:12 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 3ms (Allocations: 3178)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x00000000011350>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:32:13 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 2ms (Allocations: 2031)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x000000000113f0>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:32:13 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 2ms (Allocations: 2028)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x00000000011468>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started PUT "/lists/2" for ::1 at 2022-02-27 14:32:21 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by ListsController#update as */*
+  Parameters: {"id"=>"2", "list"=>{}}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.9ms | Allocations: 2029)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x00000000011508>):
+  
+app/controllers/lists_controller.rb:25:in `update'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:33:11 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 7ms (Allocations: 4569)
+
+
+  
+NoMethodError (undefined method `id' for List (call 'List.connection' to establish a connection):Class
+Did you mean?  ids):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:33:12 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 3ms (Allocations: 3393)
+
+
+  
+NoMethodError (undefined method `id' for List (call 'List.connection' to establish a connection):Class
+Did you mean?  ids):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:33:26 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mList Pluck (0.1ms)[0m  [1m[34mSELECT "lists"."id" FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mList Load (0.5ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 1.2ms | Allocations: 8953)
+
+
+  
+NoMethodError (undefined method `destroy' for #<Array:0x00007f526c2a71d0>):
+  
+app/controllers/lists_controller.rb:21:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:33:27 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mList Pluck (0.1ms)[0m  [1m[34mSELECT "lists"."id" FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.2ms | Allocations: 2398)
+
+
+  
+NoMethodError (undefined method `destroy' for #<Array:0x00007f524c22cbf8>):
+  
+app/controllers/lists_controller.rb:21:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:34:37 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+Completed 404 Not Found in 5ms (ActiveRecord: 0.8ms | Allocations: 2856)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find List with 'id'=id):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:34:38 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.1ms | Allocations: 505)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find List with 'id'=id):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:34:39 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.1ms | Allocations: 506)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find List with 'id'=id):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:34:47 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+Completed 404 Not Found in 3ms (ActiveRecord: 0.4ms | Allocations: 2037)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find List without an ID):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:35:07 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 6ms (Allocations: 3211)
+
+
+  
+NameError (undefined local variable or method `list_id' for #<ListsController:0x000000000244f0>
+Did you mean?  list_url):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:35:22 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (23.59ms)
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+Completed 404 Not Found in 43ms (Views: 38.4ms | ActiveRecord: 1.8ms | Allocations: 16893)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find List with 'id'=[{"task":"create api","status":"ongoing","user_id":1,"user":{"name":"hashish"}},{"task":"THIS IS AN UPDATED VERSION","status":"done","user_id":1,"user":{"name":"hashish"}}]):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/2" for ::1 at 2022-02-27 14:35:32 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"2"}
+Completed 500 Internal Server Error in 3ms (Allocations: 3176)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x0000000002be08>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started DELETE "/lists/1/2" for ::1 at 2022-02-27 14:36:12 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists/1/2"):
+  
+Started DELETE "/lists/1/2" for ::1 at 2022-02-27 14:36:13 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists/1/2"):
+  
+Started DELETE "/lists/1" for ::1 at 2022-02-27 14:36:19 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 7ms (Allocations: 3213)
+
+
+  
+NameError (undefined local variable or method `user_id' for #<ListsController:0x0000000002fbc0>
+Did you mean?  user_url):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/1" for ::1 at 2022-02-27 14:36:31 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 9ms (Allocations: 2979)
+
+
+  
+NoMethodError (undefined method `attributes' for #<ListsController:0x00000000033888>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/1,1" for ::1 at 2022-02-27 14:37:04 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1,1"}
+Completed 500 Internal Server Error in 6ms (Allocations: 3174)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x000000000376b8>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mList Delete All (7.9ms)[0m  [1m[31mDELETE FROM "lists" WHERE "lists"."id" = ?[0m  [["id", 2]]
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started DELETE "/lists/1" for ::1 at 2022-02-27 14:43:55 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 4ms (Allocations: 3211)
+
+
+  
+NameError (undefined local variable or method `list_id' for #<ListsController:0x0000000003b448>
+Did you mean?  list_url):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/?id=1" for ::1 at 2022-02-27 14:44:22 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/?id=1" for ::1 at 2022-02-27 14:44:36 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/?id=1" for ::1 at 2022-02-27 14:44:37 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/?id=1" for ::1 at 2022-02-27 14:44:38 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/?id=1" for ::1 at 2022-02-27 14:44:52 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/?id=1" for ::1 at 2022-02-27 14:44:53 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/?id=1" for ::1 at 2022-02-27 14:46:26 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/?id=1" for ::1 at 2022-02-27 14:46:27 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/" for ::1 at 2022-02-27 14:47:35 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/" for ::1 at 2022-02-27 14:47:36 +0200
+  
+ActionController::RoutingError (No route matches [DELETE] "/lists"):
+  
+Started DELETE "/lists/1" for ::1 at 2022-02-27 14:47:48 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" ORDER BY "lists"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mList Destroy (0.3ms)[0m  [1m[31mDELETE FROM "lists" WHERE "lists"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+Completed 204 No Content in 15ms (ActiveRecord: 4.8ms | Allocations: 5250)
+
+
+Started DELETE "/lists/1" for ::1 at 2022-02-27 14:48:15 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 3ms (Allocations: 3174)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x0000000004ea48>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/1" for ::1 at 2022-02-27 14:48:30 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 5ms (Allocations: 3211)
+
+
+  
+NameError (undefined local variable or method `list_id' for #<ListsController:0x000000000528c8>
+Did you mean?  list_url):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/1" for ::1 at 2022-02-27 14:48:42 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.4ms | Allocations: 3378)
+
+
+  
+NoMethodError (undefined method `destroy' for nil:NilClass):
+  
+app/controllers/lists_controller.rb:21:in `destroy'
+Started DELETE "/lists/1" for ::1 at 2022-02-27 14:49:03 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 3ms (Allocations: 3174)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x0000000005a5a0>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mList Create (0.1ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "testing"], ["status", "ongoing"], ["user_id", 1], ["created_at", "2022-02-27 12:49:44.756900"], ["updated_at", "2022-02-27 12:49:44.756900"]]
+  [1m[36mTRANSACTION (5.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started DELETE "/lists/5" for ::1 at 2022-02-27 14:50:01 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"5"}
+Completed 500 Internal Server Error in 1ms (Allocations: 2028)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x0000000005a668>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/5" for ::1 at 2022-02-27 14:50:53 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"5"}
+Completed 500 Internal Server Error in 4ms (Allocations: 3221)
+
+
+  
+NameError (undefined local variable or method `lists' for #<ListsController:0x0000000005e5d8>
+Did you mean?  lists_url):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/5" for ::1 at 2022-02-27 14:51:45 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"5"}
+Completed 500 Internal Server Error in 3ms (Allocations: 3187)
+
+
+  
+NameError (undefined local variable or method `id' for #<ListsController:0x00000000062570>):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/5" for ::1 at 2022-02-27 14:51:58 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"5"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1237)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 0)):
+  
+app/controllers/lists_controller.rb:20:in `destroy'
+Started DELETE "/lists/5" for ::1 at 2022-02-27 14:52:43 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mList Destroy (0.1ms)[0m  [1m[31mDELETE FROM "lists" WHERE "lists"."id" = ?[0m  [["id", 5]]
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (66.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+Completed 204 No Content in 74ms (ActiveRecord: 67.0ms | Allocations: 5197)
+
+
+Started PUT "/lists/5" for ::1 at 2022-02-27 14:53:12 +0200
+Processing by ListsController#update as */*
+  Parameters: {"id"=>"5"}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.4ms | Allocations: 3333)
+
+
+  
+NoMethodError (undefined method `update' for nil:NilClass):
+  
+app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mList Create (0.2ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "testing"], ["status", "ongoing"], ["user_id", 1], ["created_at", "2022-02-27 12:53:50.336355"], ["updated_at", "2022-02-27 12:53:50.336355"]]
+  [1m[36mTRANSACTION (8.2ms)[0m  [1m[36mcommit transaction[0m
+Started PUT "/lists/6" for ::1 at 2022-02-27 14:53:59 +0200
+Processing by ListsController#update as */*
+  Parameters: {"id"=>"6"}
+  [1m[36mList Load (0.2ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mList Update (0.3ms)[0m  [1m[33mUPDATE "lists" SET "task" = ?, "status" = ?, "updated_at" = ? WHERE "lists"."id" = ?[0m  [["task", "THIS IS AN UPDATED VERSION"], ["status", "done"], ["updated_at", "2022-02-27 12:53:59.167123"], ["id", 6]]
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:26:in `update'
+Completed 204 No Content in 27ms (ActiveRecord: 8.6ms | Allocations: 7529)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started GET "/lists" for ::1 at 2022-02-27 14:57:44 +0200
+Processing by ListsController#index as */*
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (1.53ms)
+Completed 200 OK in 3ms (Views: 2.8ms | ActiveRecord: 0.1ms | Allocations: 2408)
+
+
+Started POST "/lists" for ::1 at 2022-02-27 15:02:00 +0200
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ListsController#create as */*
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mList Create (0.7ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "tetsing the create function"], ["status", "outgoing"], ["user_id", 1], ["created_at", "2022-02-27 13:02:00.840694"], ["updated_at", "2022-02-27 13:02:00.840694"]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (5.98ms)
+Completed 200 OK in 204ms (Views: 36.5ms | ActiveRecord: 9.0ms | Allocations: 34888)
+
+
+Started GET "/lists" for ::1 at 2022-02-27 15:02:10 +0200
+Processing by ListsController#index as */*
+  [1m[36mList Load (0.4ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (4.25ms)
+Completed 200 OK in 7ms (Views: 6.1ms | ActiveRecord: 0.5ms | Allocations: 2965)
+
+
+Started POST "/lists?task=new%20task&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:06:07 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"new task", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1254)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=new%20task&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:06:32 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"new task", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1250)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=new%20task&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:06:41 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"new task", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1249)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/controllers/lists_controller.rb:13:in `[]'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=new%20task&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:06:57 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"new task", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 3ms (Allocations: 1243)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=new%20task&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:07:20 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"new task", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1246)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=new%20task&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:08:40 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"new task", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 0ms (Allocations: 101)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=new_task&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:09:23 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"new_task", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 0ms (Allocations: 101)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=new_task" for ::1 at 2022-02-27 15:09:52 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"new_task"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 1.3ms | Allocations: 3230)
+
+
+  
+ArgumentError (When assigning attributes, you must pass a hash as an argument, String passed.):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22new_task%22" for ::1 at 2022-02-27 15:10:07 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"new_task\""}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 116)
+
+
+  
+ArgumentError (When assigning attributes, you must pass a hash as an argument, String passed.):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22new_task%22" for ::1 at 2022-02-27 15:10:08 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"new_task\""}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 116)
+
+
+  
+ArgumentError (When assigning attributes, you must pass a hash as an argument, String passed.):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22new_task%22" for ::1 at 2022-02-27 15:10:27 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"new_task\""}
+Completed 500 Internal Server Error in 3ms (Allocations: 1249)
+
+
+  
+ArgumentError (unknown keyword: :user_id):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22new_task%22" for ::1 at 2022-02-27 15:11:05 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"new_task\""}
+Completed 500 Internal Server Error in 2ms (Allocations: 1247)
+
+
+  
+ArgumentError (unknown keyword: :user_id):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22new_task%22" for ::1 at 2022-02-27 15:11:07 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"new_task\""}
+Completed 500 Internal Server Error in 0ms (Allocations: 102)
+
+
+  
+ArgumentError (unknown keyword: :user_id):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 15:11:37 +0200
+Processing by ListsController#create as */*
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mList Create (0.2ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "test"], ["status", "ongoing"], ["user_id", 1], ["created_at", "2022-02-27 13:11:37.400867"], ["updated_at", "2022-02-27 13:11:37.400867"]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.93ms)
+Completed 200 OK in 20ms (Views: 2.1ms | ActiveRecord: 5.3ms | Allocations: 8705)
+
+
+Started POST "/lists?task=%22new_task%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 15:12:59 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"new_task\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mList Create (0.3ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "test"], ["status", "ongoing"], ["user_id", 1], ["created_at", "2022-02-27 13:12:59.506848"], ["updated_at", "2022-02-27 13:12:59.506848"]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.37ms)
+Completed 200 OK in 13ms (Views: 0.9ms | ActiveRecord: 7.5ms | Allocations: 2772)
+
+
+Started POST "/lists?task=%22new_task%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 15:13:41 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"new_task\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1246)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22new_task%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 15:13:53 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"new_task\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.8ms | Allocations: 3208)
+
+
+  
+ArgumentError (When assigning attributes, you must pass a hash as an argument, String passed.):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22new_task%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 15:14:57 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"new_task\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+Completed 500 Internal Server Error in 3ms (Allocations: 1246)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task:%22new_task%22&status:%22ongoing%22&user_id:1" for ::1 at 2022-02-27 15:16:05 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task:\"new_task\""=>nil, "status:\"ongoing\""=>nil, "user_id:1"=>nil}
+Completed 500 Internal Server Error in 0ms (Allocations: 103)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task:%22new_task%22&status:%22ongoing%22&user_id:1" for ::1 at 2022-02-27 15:16:06 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task:\"new_task\""=>nil, "status:\"ongoing\""=>nil, "user_id:1"=>nil}
+Completed 500 Internal Server Error in 0ms (Allocations: 103)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists/task:%22new_task%22&status:%22ongoing%22&user_id:1" for ::1 at 2022-02-27 15:16:12 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/lists/task:%22new_task%22&status:%22ongoing%22&user_id:1"):
+  
+Started POST "/lists" for ::1 at 2022-02-27 15:16:33 +0200
+Processing by ListsController#create as */*
+Completed 500 Internal Server Error in 0ms (Allocations: 103)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 15:16:34 +0200
+Processing by ListsController#create as */*
+Completed 500 Internal Server Error in 0ms (Allocations: 103)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 15:16:35 +0200
+Processing by ListsController#create as */*
+Completed 500 Internal Server Error in 0ms (Allocations: 103)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22test%22" for ::1 at 2022-02-27 15:16:58 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"test\""}
+Completed 500 Internal Server Error in 0ms (Allocations: 101)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22test%22" for ::1 at 2022-02-27 15:16:59 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"test\""}
+Completed 500 Internal Server Error in 0ms (Allocations: 101)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22test%22" for ::1 at 2022-02-27 15:17:00 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"test\""}
+Completed 500 Internal Server Error in 0ms (Allocations: 101)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22test%22" for ::1 at 2022-02-27 15:17:01 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"test\""}
+Completed 500 Internal Server Error in 0ms (Allocations: 101)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22test%22" for ::1 at 2022-02-27 15:17:02 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"test\""}
+Completed 500 Internal Server Error in 0ms (Allocations: 101)
+
+
+  
+ArgumentError (wrong number of arguments (given 3, expected 0..1)):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 15:17:58 +0200
+Processing by ListsController#create as */*
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mList Create (0.2ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "test"], ["status", "ongoing"], ["user_id", 1], ["created_at", "2022-02-27 13:17:58.400875"], ["updated_at", "2022-02-27 13:17:58.400875"]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.93ms)
+Completed 200 OK in 21ms (Views: 2.1ms | ActiveRecord: 5.1ms | Allocations: 8746)
+
+
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started GET "/lists" for ::1 at 2022-02-27 15:46:32 +0200
+Processing by ListsController#index as */*
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (5.09ms)
+Completed 200 OK in 7ms (Views: 7.1ms | ActiveRecord: 0.4ms | Allocations: 6710)
+
+
+Started DELETE "/lists/6" for ::1 at 2022-02-27 15:46:58 +0200
+Processing by ListsController#destroy as */*
+  Parameters: {"id"=>"6"}
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:20:in `destroy'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mList Destroy (0.1ms)[0m  [1m[31mDELETE FROM "lists" WHERE "lists"."id" = ?[0m  [["id", 6]]
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:21:in `destroy'
+Completed 204 No Content in 10ms (ActiveRecord: 7.6ms | Allocations: 2081)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started POST "/lists" for ::1 at 2022-02-27 15:53:47 +0200
+Processing by ListsController#create as */*
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+Completed 204 No Content in 6ms (ActiveRecord: 0.2ms | Allocations: 3881)
+
+
+Started POST "/lists?task=%22test%22" for ::1 at 2022-02-27 15:53:55 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"test\""}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 176)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started POST "/lists?task=%22testwefewfwef%22" for ::1 at 2022-02-27 15:54:11 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"testwefewfwef\""}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 176)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started POST "/lists?task=%22testwefewfwef%22&user_id=1" for ::1 at 2022-02-27 15:54:27 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"testwefewfwef\"", "user_id"=>"1"}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 177)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started POST "/lists?task=%22testwefewfwef%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 15:54:58 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"testwefewfwef\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 175)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started POST "/lists?task=%22testwefewfwef%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 15:56:02 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"testwefewfwef\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.26ms)
+Completed 200 OK in 7ms (Views: 1.1ms | ActiveRecord: 0.6ms | Allocations: 4913)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:56:21 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.19ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 409)
+
+
+Started POST "/lists?task=%22testwefewfwef%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 15:57:11 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"testwefewfwef\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.19ms)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 409)
+
+
+Started POST "/lists?task=%22testwefewfwef%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 15:57:13 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"testwefewfwef\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.42ms)
+Completed 200 OK in 2ms (Views: 0.9ms | ActiveRecord: 0.0ms | Allocations: 410)
+
+
+Started POST "/lists?task:=%22testwefewfwef%22&status:=%22ongoing%22&user_id:=1" for ::1 at 2022-02-27 15:57:25 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task:"=>"\"testwefewfwef\"", "status:"=>"\"ongoing\"", "user_id:"=>"1"}
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.19ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 409)
+
+
+Started POST "/lists?task:=%22testwefewfwef%22&status:=%22ongoing%22&user_id:=%221%22" for ::1 at 2022-02-27 15:57:36 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task:"=>"\"testwefewfwef\"", "status:"=>"\"ongoing\"", "user_id:"=>"\"1\""}
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.16ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 409)
+
+
+Started POST "/lists?task:=%27testwefewfwef%27&status:=%27ongoing%27&user_id:=1" for ::1 at 2022-02-27 15:57:53 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task:"=>"'testwefewfwef'", "status:"=>"'ongoing'", "user_id:"=>"1"}
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.18ms)
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 409)
+
+
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:58:24 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.16ms)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 409)
+
+
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:59:07 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+Redirected to http://localhost:3000/lists
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.5ms | Allocations: 4519)
+
+
+  
+AbstractController::DoubleRenderError (Render and/or redirect were called multiple times in this action. Please note that you may only call render OR redirect, and at most once per action. Also note that neither redirect nor render terminate execution of the action, so if you want to exit an action after redirecting, you need to do something like "redirect_to(...) and return".):
+  
+app/controllers/lists_controller.rb:16:in `create'
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 15:59:18 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+Redirected to http://localhost:3000/lists
+Completed 302 Found in 6ms (ActiveRecord: 0.5ms | Allocations: 4417)
+
+
+Started GET "/lists" for ::1 at 2022-02-27 15:59:18 +0200
+Processing by ListsController#index as */*
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (7.24ms)
+Completed 200 OK in 9ms (Views: 8.5ms | ActiveRecord: 0.5ms | Allocations: 6804)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started POST "/lists" for ::1 at 2022-02-27 16:00:17 +0200
+Processing by ListsController#create as */*
+Redirected to http://localhost:3000/lists
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 270)
+
+
+Started GET "/lists" for ::1 at 2022-02-27 16:00:17 +0200
+Processing by ListsController#index as */*
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (3.9ms)
+Completed 200 OK in 5ms (Views: 4.7ms | ActiveRecord: 0.1ms | Allocations: 4985)
+
+
+Started POST "/lists" for ::1 at 2022-02-27 16:01:33 +0200
+Processing by ListsController#create as */*
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+Redirected to 
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.5ms | Allocations: 4433)
+
+
+  
+ActionController::ActionControllerError (Cannot redirect to nil!):
+  
+app/controllers/lists_controller.rb:15:in `create'
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 16:01:44 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+Redirected to 
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 271)
+
+
+  
+ActionController::ActionControllerError (Cannot redirect to nil!):
+  
+app/controllers/lists_controller.rb:15:in `create'
+Started POST "/lists/" for ::1 at 2022-02-27 16:16:28 +0200
+Processing by ListsController#create as */*
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+Redirected to 
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.2ms | Allocations: 738)
+
+
+  
+ActionController::ActionControllerError (Cannot redirect to nil!):
+  
+app/controllers/lists_controller.rb:15:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 16:17:50 +0200
+  
+SyntaxError (/home/mohamed/Desktop/project/app/controllers/lists_controller.rb:29: syntax error, unexpected ',', expecting `end'
+        params.require(:task),permit(:status,:user_id)
+                             ^
+):
+  
+app/controllers/lists_controller.rb:29: syntax error, unexpected ',', expecting `end'
+app/controllers/lists_controller.rb:29: syntax error, unexpected ',', expecting `end'
+Started POST "/lists" for ::1 at 2022-02-27 16:18:17 +0200
+Processing by ListsController#create as */*
+Completed 400 Bad Request in 2ms (Allocations: 1270)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: task):
+  
+app/controllers/lists_controller.rb:29:in `listParams'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 16:18:32 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 2ms (Allocations: 1281)
+
+
+  
+NoMethodError (undefined method `permit' for "testwefewfwef":String):
+  
+app/controllers/lists_controller.rb:29:in `listParams'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22testwefewfwef%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 16:18:50 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"testwefewfwef\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+Completed 500 Internal Server Error in 1ms (Allocations: 1274)
+
+
+  
+NoMethodError (undefined method `permit' for "\"testwefewfwef\"":String):
+  
+app/controllers/lists_controller.rb:29:in `listParams'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=%22testwefewfwef%22&status=%22ongoing%22&user_id=1" for ::1 at 2022-02-27 16:20:01 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"\"testwefewfwef\"", "status"=>"\"ongoing\"", "user_id"=>"1"}
+Completed 500 Internal Server Error in 6ms (Allocations: 3214)
+
+
+  
+NameError (undefined local variable or method `list_params' for #<ListsController:0x0000000005b888>
+Did you mean?  list_param):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 16:20:13 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 12ms (Allocations: 2064)
+
+
+  
+NameError (undefined local variable or method `list_params' for #<ListsController:0x0000000005b928>
+Did you mean?  list_param):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 16:20:39 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 3ms (Allocations: 2423)
+
+
+  
+NoMethodError (undefined method `permit' for "testwefewfwef":String):
+  
+app/controllers/lists_controller.rb:29:in `list_param'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 16:21:11 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 3ms (Allocations: 2420)
+
+
+  
+NoMethodError (undefined method `permit' for "testwefewfwef":String):
+  
+app/controllers/lists_controller.rb:29:in `list_param'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 16:21:13 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 1ms (Allocations: 1273)
+
+
+  
+NoMethodError (undefined method `permit' for "testwefewfwef":String):
+  
+app/controllers/lists_controller.rb:29:in `list_param'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/list?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 16:21:21 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/list"):
+  
+Started POST "/lists?task=testwefewfwef&status=ongoing&user_id=1" for ::1 at 2022-02-27 16:21:29 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"testwefewfwef", "status"=>"ongoing", "user_id"=>"1"}
+Completed 500 Internal Server Error in 1ms (Allocations: 1274)
+
+
+  
+NoMethodError (undefined method `permit' for "testwefewfwef":String):
+  
+app/controllers/lists_controller.rb:29:in `list_param'
+app/controllers/lists_controller.rb:13:in `create'
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started PUT "/lists/9" for ::1 at 2022-02-27 16:26:26 +0200
+Processing by ListsController#update as */*
+  Parameters: {"id"=>"9"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:24:in `update'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists" WHERE "lists"."id" = ? LIMIT ?[0m  [["id", 9], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:24:in `update'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+  [1m[36mList Update (0.2ms)[0m  [1m[33mUPDATE "lists" SET "task" = ?, "status" = ?, "updated_at" = ? WHERE "lists"."id" = ?[0m  [["task", "THIS IS AN UPDATED VERSION"], ["status", "done"], ["updated_at", "2022-02-27 14:26:26.747110"], ["id", 9]]
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+  [1m[36mTRANSACTION (21.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:25:in `update'
+Completed 204 No Content in 41ms (ActiveRecord: 23.1ms | Allocations: 8670)
+
+
+  [1m[36mList Load (0.3ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+Started POST "/lists/9" for ::1 at 2022-02-27 16:27:20 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/lists/9"):
+  
+Started POST "/lists" for ::1 at 2022-02-27 16:27:23 +0200
+Processing by ListsController#create as */*
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 124)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: task):
+  
+app/controllers/lists_controller.rb:29:in `list_param'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 16:29:58 +0200
+Processing by ListsController#create as */*
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+Redirected to 
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.5ms | Allocations: 4388)
+
+
+  
+ActionController::ActionControllerError (Cannot redirect to nil!):
+  
+app/controllers/lists_controller.rb:16:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 16:30:32 +0200
+  
+SyntaxError (/home/mohamed/Desktop/project/app/controllers/lists_controller.rb:16: syntax error, unexpected ':', expecting `end'
+        head: :ok
+            ^
+):
+  
+app/controllers/lists_controller.rb:16: syntax error, unexpected ':', expecting `end'
+app/controllers/lists_controller.rb:16: syntax error, unexpected ':', expecting `end'
+Started POST "/lists" for ::1 at 2022-02-27 16:33:06 +0200
+  
+SyntaxError (/home/mohamed/Desktop/project/app/controllers/lists_controller.rb:15: syntax error, unexpected ':', expecting `end'
+        head: :ok
+            ^
+):
+  
+app/controllers/lists_controller.rb:15: syntax error, unexpected ':', expecting `end'
+app/controllers/lists_controller.rb:15: syntax error, unexpected ':', expecting `end'
+Started GET "/lists" for ::1 at 2022-02-27 16:33:48 +0200
+  
+SyntaxError (/home/mohamed/Desktop/project/app/controllers/lists_controller.rb:15: syntax error, unexpected ':', expecting `end'
+        head: :ok
+            ^
+):
+  
+app/controllers/lists_controller.rb:15: syntax error, unexpected ':', expecting `end'
+app/controllers/lists_controller.rb:15: syntax error, unexpected ':', expecting `end'
+Started GET "/lists" for ::1 at 2022-02-27 16:34:42 +0200
+Processing by ListsController#index as */*
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (11.88ms)
+Completed 200 OK in 20ms (Views: 17.7ms | ActiveRecord: 1.4ms | Allocations: 11036)
+
+
+Started GET "/lists" for ::1 at 2022-02-27 16:35:09 +0200
+Processing by ListsController#index as */*
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (8.76ms)
+Completed 200 OK in 15ms (Views: 13.1ms | ActiveRecord: 1.0ms | Allocations: 11009)
+
+
+Started POST "/lists" for ::1 at 2022-02-27 16:35:13 +0200
+Processing by ListsController#create as */*
+  Parameters: {"task"=>"ali says hi", "status"=>"ongoing", "user_id"=>1, "list"=>{"task"=>"ali says hi", "status"=>"ongoing", "user_id"=>1}}
+Completed 500 Internal Server Error in 0ms (ActiveRecord: 0.0ms | Allocations: 116)
+
+
+  
+ActiveModel::ForbiddenAttributesError (ActiveModel::ForbiddenAttributesError):
+  
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 16:36:46 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    "list" {
+        "task":"ali says hi",
+        "status":"ongoing",
+         "user_id":1
+    }
+}
+Processing by ListsController#create as */*
+Completed 400 Bad Request in 0ms (Allocations: 121)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+  
+app/controllers/lists_controller.rb:29:in `list_param'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 16:36:59 +0200
+Error occurred while parsing request parameters.
+Contents:
+
+{
+    "list" {
+        "task":"ali says hi",
+        "status":"ongoing",
+         "user_id":1
+    }
+}
+Processing by ListsController#create as */*
+Completed 400 Bad Request in 0ms (Allocations: 121)
+
+
+  
+ActionDispatch::Http::Parameters::ParseError (Error occurred while parsing request parameters):
+  
+app/controllers/lists_controller.rb:29:in `list_param'
+app/controllers/lists_controller.rb:13:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 16:37:08 +0200
+Processing by ListsController#create as */*
+  Parameters: {"list"=>{"task"=>"ali says hi", "status"=>"ongoing", "user_id"=>1}}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mList Create (0.1ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "ali says hi"], ["status", "ongoing"], ["user_id", 1], ["created_at", "2022-02-27 14:37:08.462901"], ["updated_at", "2022-02-27 14:37:08.462901"]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 7.8ms | Allocations: 8723)
+
+
+  
+NoMethodError (undefined method `rende' for #<ListsController:0x0000000007f9b8>
+Did you mean?  render
+               end):
+  
+app/controllers/lists_controller.rb:15:in `create'
+Started POST "/lists" for ::1 at 2022-02-27 16:37:16 +0200
+Processing by ListsController#create as */*
+  Parameters: {"list"=>{"task"=>"ali says hi", "status"=>"ongoing", "user_id"=>1}}
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:13:in `create'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mList Create (0.2ms)[0m  [1m[32mINSERT INTO "lists" ("task", "status", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["task", "ali says hi"], ["status", "ongoing"], ["user_id", 1], ["created_at", "2022-02-27 14:37:16.933097"], ["updated_at", "2022-02-27 14:37:16.933097"]]
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/lists_controller.rb:14:in `create'
+[active_model_serializers] Rendered ListSerializer with ActiveModelSerializers::Adapter::Attributes (0.64ms)
+Completed 200 OK in 15ms (Views: 1.4ms | ActiveRecord: 5.4ms | Allocations: 7606)
+
+
+Started GET "/lists" for ::1 at 2022-02-27 16:52:22 +0200
+Processing by ListsController#index as */*
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+  [1m[36mList Load (0.1ms)[0m  [1m[34mSELECT "lists".* FROM "lists"[0m
+  ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers]   [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[active_model_serializers]   ↳ app/controllers/lists_controller.rb:4:in `index'
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with ActiveModelSerializers::Adapter::Attributes (5.72ms)
+Completed 200 OK in 8ms (Views: 7.6ms | ActiveRecord: 0.3ms | Allocations: 7756)
+
+
